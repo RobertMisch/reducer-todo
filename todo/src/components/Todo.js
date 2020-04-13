@@ -1,12 +1,13 @@
 import React from 'react'
+import {initialState, reducer} from '../reducers/reducer'
+
+
 
 const Todo = (props)=>{
+    console.log(props)
     return(
-        <div 
-        className={`item${props.item.completed ? ' completed' : ''}`}
-        onClick={() => props.toggleItem(props.item.id)}
-        >
-            <p>{props.item.data}</p>
+        <div>
+            <p>{props.item.task}</p>
         </div>
     )
 }
