@@ -2,18 +2,14 @@ import React, {useState, useReducer} from 'react'
 import Todo from './Todo'
 import {initialState, reducer} from '../reducers/reducer'
 
-const TodoForm= () => {
-
-    const [state, dispatch] = useReducer(reducer, initialState);
+const TodoForm= (props) => {
 
     const [newTodo, setNewTodo] = useState();
 
     const submitHandler = (e)=>{
         e.preventDefault()
-        // console.log(newTodo)
-        // console.log(state)
-        dispatch({type:'ADD_TODO', payload: newTodo})
-        // console.log(state)
+        props.addTodo(newTodo)
+        setNewTodo('')
     }
 
     const changeHandler = (e) =>{
@@ -28,7 +24,7 @@ const TodoForm= () => {
             onChange={changeHandler}>
             </input>
             <button type='submit'>add</button>
-            <button onClick={()=>{dispatch({type:'CLEAR_COMPLETED'})}}>clear completed</button>
+            <button onClick={()=>{props.clearCompleted()}}>clear completed</button>
         </form>
     )
 }

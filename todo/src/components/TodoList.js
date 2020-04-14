@@ -7,14 +7,15 @@ import {reducer, initialState} from '../reducers/reducer'
 -toggle todo
 -clear completed and all need state*/ 
 
-const TodoList= () => {
-    const [state, dispatch] = useReducer(reducer, initialState);
+const TodoList= (props) => {
+    console.log(props.toggleItems)
+    // const [state, dispatch] = useReducer(reducer, initialState);
     return(
         <div>
         {
             // console.log(state)
-            state.todos.map(item => {
-                return <Todo item={item}/>
+            props.todos.map(item => {
+                return <Todo item={item} toggleItems={props.toggleItems}/>
             })
         }
         </div>

@@ -15,6 +15,9 @@ export const initialState = {
 -toggle todo
 -clear completed and all need state*/ 
 
+// className={`item${props.item.completed ? ' completed' : ''}`}
+        // onClick={() => props.toggleItem(props.item.id)}
+
 export const reducer = (state, action) => {
     console.log(state)
     switch (action.type) {
@@ -24,22 +27,26 @@ export const reducer = (state, action) => {
             todos: [...state.todos,
                 {task:action.payload,
                 completed:false,
-                id:new Date().getTime,
+                id: new Date().getTime()
+                // id: Math.floor((Math.random() * 1000) + 1),
             }
             ]
         };
-        case 'COMPLETE_TODO':
+        case 'TOGGLE_TODO':
         return {
             ...state,
-            completed:true,
+            todos: state.todos.map(item =>{
+                if(action.payload === item.id){
+                    return{
+                        ...item, completed: !item.completed
+                    }
+                }
+                return item;
+            })
         };
         case 'CLEAR_COMPLETED':
             return{
-                
-            }
-        case 'TOGGLE_COMPLETE':
-            return{
-                
+                todos: state.todos.filter(item => !item.completed)
             }
         default:
         return state;
